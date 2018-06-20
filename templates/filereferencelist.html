@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+
+    <!-- Bootstrap CSS -->
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now 'U' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors/blue.css' %}?{% now 'U' %}"/>
+    <link href={% static "css/ion.rangeSlider.css" %}  rel="stylesheet"/>
+    <link href={% static "css/ion.rangeSlider.skinModern.css" %}  rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/offer.css' %}?{% now 'U' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'equal-height-columns.css' %}?{% now 'U' %}"/>
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"/>
+
+ 
+
+
+<style>
+
+    table {
+        border-collapse: separate !important;
+}
+
+
+
+
+
+    }
+
+    table thead th {
+        height:50px;
+    }
+    
+    thead tr {
+        background:#91c5d4;
+        height:50px;
+        }
+            
+        thead th[colspan],
+        thead th[rowspan] {
+            background:#66a9d;
+            }
+        
+    tbody th,
+    tfoot th {
+        text-align:left;
+        background:#91c5d4;
+        }
+        
+    tbody td,
+    tfoot td {
+        text-align:left;
+        background:#d5eaf0;
+        height:40px;
+        }
+        
+    tfoot th {
+        background:#b0cc7f;
+
+        }
+        
+    tfoot td {
+        background:#d7e1c5;
+        font-weight:bold;
+        }
+            
+    tbody tr.odd td { 
+        background:#bcd9e1;
+        }
+    
+    </style>
+
+
+
+
+
+
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+
+
+
+    <title>File References</title>
+
+
+</head>
+
+<body>
+<div class="d-flex justify-content-center">
+<span class='p-2 mt-2'>
+    File Reference: 
+</span>
+<span class='p-2'>
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons" >
+  <label class="btn btn-primary active" id="Alllist">
+    <input type="radio" name="options"  autocomplete="off" class="filereferenceselection" checked>All
+  </label>
+  <label class="btn btn-primary" id="Recentlist">
+    <input type="radio" name="options"  autocomplete="off"  class="filereferenceselection" >Recent
+  </label>
+  <label class="btn btn-primary" id="Favouritelist">
+    <input type="radio" name="options" autocomplete="off" class="filereferenceselection" >Favourite
+  </label>
+</div>
+</span>
+</div>
+
+<div class="filereferencediv Alllist"> 
+    <table id='filereferenceAlllist' >
+        <thead>
+            <tr>
+                <th>Compartment</th>
+                <th>File Reference No.</th>
+                <th>File Reference Title</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+{% for filelist in alllist %}
+<tr>
+    <td>
+        {{filelist.compartment}}
+    </td>
+    <td>
+        {{filelist.fileRefNo}}
+    </td>
+    <td>
+    {{filelist.fileRefTitle}}
+    </td>
+    <td align="center">
+        <a href="#"><button class="btn btn-success"><i class="fas fa-file"></i> File</button></a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+    
+<div class="filereferencediv Recentlist" style="display:none">
+
+    <table id='filereferenceRecentlist' >
+        <thead>
+            <tr>
+                <th>Compartment</th>
+                <th>File Reference No.</th>
+                <th>File Reference Title</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+{% for filelist in lastaccesslist %}
+<tr>
+    <td>
+        {{filelist.compartment}}
+    </td>
+    <td>
+        {{filelist.fileRefNo}}
+    </td>
+    <td>
+    {{filelist.fileRefTitle}}
+    </td>
+    <td align="center">
+        <a href="#"><button class="btn btn-success"><i class="fas fa-file"></i> File</button></a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="filereferencediv Favouritelist" style="display:none">
+
+
+<table id='filereferenceFavouritelist' >
+        <thead>
+            <tr>
+                <th>Compartment</th>
+                <th>File Reference No.</th>
+                <th>File Reference Title</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+{% for filelist in favlist %}
+<tr>
+    <td>
+        {{filelist.compartment}}
+    </td>
+    <td>
+        {{filelist.fileRefNo}}
+    </td>
+    <td>
+    {{filelist.fileRefTitle}}
+    </td>
+    <td align="center">
+        <a href="#"><button class="btn btn-success"><i class="fas fa-file"></i> File</button></a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</body>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+<script>
+
+
+
+    $(document).ready(function() {
+/*
+
+    $('#filereferenceAlllist').DataTable( {
+        "paging":   true,
+        "ordering": true,
+    } );
+    $('#filereferenceRecentlist').DataTable( {
+        "paging":   true,
+        "ordering": true,
+    } );
+    $('#filereferenceFavouritelist').DataTable( {
+        "paging":   true,
+        "ordering": true,
+    } );
+
+*/
+
+    a=$(".filereferenceselection");
+    console.log(a);
+    a.parent().on("click", function () {
+            theclass = $(this).attr('id');
+            console.log($(this), $(this).attr('id'));
+            console.log('theclass : ',theclass);
+            $('.filereferencediv').hide();
+            $('.'+theclass).show();
+
+});
+
+} );
+    </script>
+</html>
